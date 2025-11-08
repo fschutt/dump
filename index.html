@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raylay ERP Logo Font Tester</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@700&family=Anton&family=Barlow+Condensed:wght@900&family=Russo+One&family=Rajdhani:wght@700&family=Saira+Condensed:wght@900&family=Teko:wght@700&family=Archivo+Black&family=Impact&family=Passion+One:wght@900&family=Bungee&family=Rubik:wght@900&family=Work+Sans:wght@900&family=Montserrat:wght@900&family=Poppins:wght@900&family=Yanone+Kaffeesatz:wght@700&family=Fjalla+One&family=Permanent+Marker&family=Ultra&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, sans-serif;
+            padding: 40px 20px;
+            background: #1a1a1a;
+            color: #fff;
+            transition: background 0.3s;
+        }
+
+        body.light {
+            background: #f5f5f5;
+            color: #000;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .controls {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        body.light .controls {
+            background: #fff;
+            border: 1px solid #ddd;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        select, input[type="range"] {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background: #333;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        body.light select {
+            background: #fff;
+            border-color: #ddd;
+            color: #000;
+        }
+
+        input[type="range"] {
+            padding: 0;
+        }
+
+        .toggle-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .preview-area {
+            background: #000;
+            padding: 80px 40px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            margin-bottom: 40px;
+            transition: background 0.3s;
+        }
+
+        body.light .preview-area {
+            background: #fff;
+        }
+
+        .logo-container {
+            text-align: center;
+        }
+
+        .logo-title {
+            font-size: 120px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 8px;
+            letter-spacing: -2px;
+        }
+
+        .logo-subtitle {
+            font-size: 24px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .style-outline .logo-title {
+            -webkit-text-stroke: 2px currentColor;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .style-gradient .logo-title {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 25%, #d946ef 75%, #9333ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .style-gradient .logo-subtitle {
+            background: linear-gradient(135deg, #ff6b35 0%, #d946ef 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .config-output {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        body.light .config-output {
+            background: #fff;
+            border: 1px solid #ddd;
+        }
+
+        .config-label {
+            color: #ff6b35;
+            font-weight: bold;
+            margin-top: 16px;
+            display: block;
+        }
+
+        .config-label:first-child {
+            margin-top: 0;
+        }
+
+        h1 {
+            margin-bottom: 32px;
+            font-size: 32px;
+        }
+
+        h2 {
+            margin-bottom: 16px;
+            font-size: 20px;
+            opacity: 0.8;
+        }
+
+        .value-display {
+            font-size: 11px;
+            opacity: 0.6;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Raylay ERP Logo Font Tester</h1>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>Title Font</label>
+                <select id="titleFont">
+                    <option value="'Anton', sans-serif">Anton</option>
+                    <option value="'Bebas Neue', sans-serif">Bebas Neue</option>
+                    <option value="'Oswald', sans-serif" selected>Oswald</option>
+                    <option value="'Barlow Condensed', sans-serif">Barlow Condensed</option>
+                    <option value="'Russo One', sans-serif">Russo One</option>
+                    <option value="'Rajdhani', sans-serif">Rajdhani</option>
+                    <option value="'Saira Condensed', sans-serif">Saira Condensed</option>
+                    <option value="'Teko', sans-serif">Teko</option>
+                    <option value="'Archivo Black', sans-serif">Archivo Black</option>
+                    <option value="'Passion One', sans-serif">Passion One</option>
+                    <option value="'Bungee', sans-serif">Bungee</option>
+                    <option value="'Rubik', sans-serif">Rubik</option>
+                    <option value="'Work Sans', sans-serif">Work Sans</option>
+                    <option value="'Montserrat', sans-serif">Montserrat</option>
+                    <option value="'Poppins', sans-serif">Poppins</option>
+                    <option value="'Yanone Kaffeesatz', sans-serif">Yanone Kaffeesatz</option>
+                    <option value="'Fjalla One', sans-serif">Fjalla One</option>
+                    <option value="'Permanent Marker', cursive">Permanent Marker</option>
+                    <option value="'Ultra', serif">Ultra</option>
+                    <option value="Impact, sans-serif">Impact</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Subtitle Font</label>
+                <select id="subtitleFont">
+                    <option value="'Anton', sans-serif">Anton</option>
+                    <option value="'Bebas Neue', sans-serif">Bebas Neue</option>
+                    <option value="'Oswald', sans-serif">Oswald</option>
+                    <option value="'Barlow Condensed', sans-serif">Barlow Condensed</option>
+                    <option value="'Russo One', sans-serif">Russo One</option>
+                    <option value="'Rajdhani', sans-serif" selected>Rajdhani</option>
+                    <option value="'Saira Condensed', sans-serif">Saira Condensed</option>
+                    <option value="'Teko', sans-serif">Teko</option>
+                    <option value="'Archivo Black', sans-serif">Archivo Black</option>
+                    <option value="'Passion One', sans-serif">Passion One</option>
+                    <option value="'Bungee', sans-serif">Bungee</option>
+                    <option value="'Rubik', sans-serif">Rubik</option>
+                    <option value="'Work Sans', sans-serif">Work Sans</option>
+                    <option value="'Montserrat', sans-serif">Montserrat</option>
+                    <option value="'Poppins', sans-serif">Poppins</option>
+                    <option value="'Yanone Kaffeesatz', sans-serif">Yanone Kaffeesatz</option>
+                    <option value="'Fjalla One', sans-serif">Fjalla One</option>
+                    <option value="'Permanent Marker', cursive">Permanent Marker</option>
+                    <option value="'Ultra', serif">Ultra</option>
+                    <option value="Impact, sans-serif">Impact</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Title Size</label>
+                <input type="range" id="titleSize" min="60" max="200" value="120">
+                <div class="value-display" id="titleSizeValue">120px</div>
+            </div>
+
+            <div class="control-group">
+                <label>Subtitle Size</label>
+                <input type="range" id="subtitleSize" min="12" max="48" value="24">
+                <div class="value-display" id="subtitleSizeValue">24px</div>
+            </div>
+
+            <div class="control-group">
+                <label>Letter Spacing (Title)</label>
+                <input type="range" id="letterSpacing" min="-10" max="10" value="-2">
+                <div class="value-display" id="letterSpacingValue">-2px</div>
+            </div>
+
+            <div class="control-group">
+                <label>Letter Spacing (Subtitle)</label>
+                <input type="range" id="subtitleLetterSpacing" min="0" max="20" value="8">
+                <div class="value-display" id="subtitleLetterSpacingValue">8px</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label>Style Options</label>
+                <div class="toggle-group">
+                    <label class="toggle">
+                        <input type="checkbox" id="invertBg">
+                        <span>Light Background</span>
+                    </label>
+                    <label class="toggle">
+                        <input type="checkbox" id="outlineStyle">
+                        <span>Outline Text</span>
+                    </label>
+                    <label class="toggle">
+                        <input type="checkbox" id="gradientStyle" checked>
+                        <span>Gradient Text</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Color (if not gradient)</label>
+                <select id="colorChoice">
+                    <option value="#ff6b35">Orange (#ff6b35)</option>
+                    <option value="#ff8c42">Light Orange (#ff8c42)</option>
+                    <option value="#d946ef">Violet (#d946ef)</option>
+                    <option value="#9333ea">Purple (#9333ea)</option>
+                    <option value="#fff">White (#fff)</option>
+                    <option value="#000">Black (#000)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="preview-area" id="previewArea">
+            <div class="logo-container">
+                <div class="logo-title" id="logoTitle">RAYLAY</div>
+                <div class="logo-subtitle" id="logoSubtitle">ERP SYSTEMS</div>
+            </div>
+        </div>
+
+        <h2>Current Configuration</h2>
+        <div class="config-output" id="configOutput"></div>
+    </div>
+
+    <script>
+        const titleFont = document.getElementById('titleFont');
+        const subtitleFont = document.getElementById('subtitleFont');
+        const titleSize = document.getElementById('titleSize');
+        const subtitleSize = document.getElementById('subtitleSize');
+        const letterSpacing = document.getElementById('letterSpacing');
+        const subtitleLetterSpacing = document.getElementById('subtitleLetterSpacing');
+        const invertBg = document.getElementById('invertBg');
+        const outlineStyle = document.getElementById('outlineStyle');
+        const gradientStyle = document.getElementById('gradientStyle');
+        const colorChoice = document.getElementById('colorChoice');
+        const previewArea = document.getElementById('previewArea');
+        const logoTitle = document.getElementById('logoTitle');
+        const logoSubtitle = document.getElementById('logoSubtitle');
+        const configOutput = document.getElementById('configOutput');
+
+        function updatePreview() {
+            logoTitle.style.fontFamily = titleFont.value;
+            logoSubtitle.style.fontFamily = subtitleFont.value;
+            logoTitle.style.fontSize = titleSize.value + 'px';
+            logoSubtitle.style.fontSize = subtitleSize.value + 'px';
+            logoTitle.style.letterSpacing = letterSpacing.value + 'px';
+            logoSubtitle.style.letterSpacing = subtitleLetterSpacing.value + 'px';
+
+            document.getElementById('titleSizeValue').textContent = titleSize.value + 'px';
+            document.getElementById('subtitleSizeValue').textContent = subtitleSize.value + 'px';
+            document.getElementById('letterSpacingValue').textContent = letterSpacing.value + 'px';
+            document.getElementById('subtitleLetterSpacingValue').textContent = subtitleLetterSpacing.value + 'px';
+
+            document.body.classList.toggle('light', invertBg.checked);
+            logoTitle.parentElement.classList.toggle('style-outline', outlineStyle.checked);
+            logoTitle.parentElement.classList.toggle('style-gradient', gradientStyle.checked);
+
+            if (!gradientStyle.checked) {
+                logoTitle.style.color = colorChoice.value;
+                logoSubtitle.style.color = colorChoice.value;
+            }
+
+            updateConfig();
+        }
+
+        function updateConfig() {
+            const config = {
+                titleFont: titleFont.options[titleFont.selectedIndex].text,
+                subtitleFont: subtitleFont.options[subtitleFont.selectedIndex].text,
+                titleSize: titleSize.value + 'px',
+                subtitleSize: subtitleSize.value + 'px',
+                titleLetterSpacing: letterSpacing.value + 'px',
+                subtitleLetterSpacing: subtitleLetterSpacing.value + 'px',
+                lightBackground: invertBg.checked,
+                outlineStyle: outlineStyle.checked,
+                gradientStyle: gradientStyle.checked,
+                solidColor: !gradientStyle.checked ? colorChoice.value : null
+            };
+
+            configOutput.innerHTML = `
+<span class="config-label">Title Font:</span> ${config.titleFont}
+<span class="config-label">Subtitle Font:</span> ${config.subtitleFont}
+<span class="config-label">Title Size:</span> ${config.titleSize}
+<span class="config-label">Subtitle Size:</span> ${config.subtitleSize}
+<span class="config-label">Title Letter Spacing:</span> ${config.titleLetterSpacing}
+<span class="config-label">Subtitle Letter Spacing:</span> ${config.subtitleLetterSpacing}
+<span class="config-label">Light Background:</span> ${config.lightBackground}
+<span class="config-label">Outline Style:</span> ${config.outlineStyle}
+<span class="config-label">Gradient Style:</span> ${config.gradientStyle}
+<span class="config-label">Solid Color:</span> ${config.solidColor || 'N/A (gradient active)'}
+
+<span class="config-label">CSS for Title:</span>
+font-family: ${titleFont.value};
+font-size: ${config.titleSize};
+letter-spacing: ${config.titleLetterSpacing};
+font-weight: 900;
+${gradientStyle.checked ? `background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 25%, #d946ef 75%, #9333ea 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;` : `color: ${config.solidColor};`}
+${outlineStyle.checked ? `-webkit-text-stroke: 2px currentColor;
+-webkit-text-fill-color: transparent;` : ''}
+
+<span class="config-label">CSS for Subtitle:</span>
+font-family: ${subtitleFont.value};
+font-size: ${config.subtitleSize};
+letter-spacing: ${config.subtitleLetterSpacing};
+text-transform: uppercase;
+${gradientStyle.checked ? `background: linear-gradient(135deg, #ff6b35 0%, #d946ef 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;` : `color: ${config.solidColor};`}
+            `;
+        }
+
+        titleFont.addEventListener('change', updatePreview);
+        subtitleFont.addEventListener('change', updatePreview);
+        titleSize.addEventListener('input', updatePreview);
+        subtitleSize.addEventListener('input', updatePreview);
+        letterSpacing.addEventListener('input', updatePreview);
+        subtitleLetterSpacing.addEventListener('input', updatePreview);
+        invertBg.addEventListener('change', updatePreview);
+        outlineStyle.addEventListener('change', updatePreview);
+        gradientStyle.addEventListener('change', updatePreview);
+        colorChoice.addEventListener('change', updatePreview);
+
+        updatePreview();
+    </script>
+</body>
+</html>
